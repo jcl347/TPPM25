@@ -26,14 +26,14 @@ TPPM25 was tested against multiple baselines, including:
 
 ### California AOD Dataset: MSE Evaluation across Models and K Values
 
-![California AOD MSE](![image](https://github.com/user-attachments/assets/c591b1eb-8476-4b81-ba71-50068e18ec9c))
-![California AOD MAE](![image](https://github.com/user-attachments/assets/901f62c2-c62a-4851-9ac6-3fb927596f92))
+![image](https://github.com/user-attachments/assets/c591b1eb-8476-4b81-ba71-50068e18ec9c)
+![image](https://github.com/user-attachments/assets/901f62c2-c62a-4851-9ac6-3fb927596f92)
 
 This figure highlights how TPPM25 consistently outperforms LSTM, Bi-LSTM, Linear, and Heuristic models across different K values in terms of MSE and MAE.
 
 ### Performance Metrics on California Dataset
 
-![Performance Metrics](![image](https://github.com/user-attachments/assets/fa57fa82-eff0-4d02-8673-f903a0be0f7b))
+![image](https://github.com/user-attachments/assets/fa57fa82-eff0-4d02-8673-f903a0be0f7b)
 
 TPPM25 achieves the lowest MAE, MSE, SDE, and SMAPE across all compared models, including the approach by Zhang et al. (2021), GNN, and traditional linear regression.
 
