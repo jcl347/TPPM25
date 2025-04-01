@@ -16,11 +16,26 @@ Air pollution, particularly fine particulate matter (PM2.5), poses significant h
 - **Harmonic Analysis**: Uses Fast Fourier Transform (FFT) to analyze periodic PM2.5 patterns for robust forecasting.
 
 ## Experimental Findings
+
 TPPM25 was tested against multiple baselines, including:
+
 - **LSTM & Bi-LSTM**: TPPM25 demonstrated improved accuracy in learning temporal dependencies.
 - **Linear Regression & Heuristic Models**: TPPM25 significantly outperformed traditional statistical models.
 - **Comparison with Zhang et al. (2021)**: TPPM25 improved upon existing deep learning methods in univariate and multivariate PM2.5 prediction.
 - **Spatiotemporal Robustness**: Evaluated using datasets from California and Shanghai, showing superior performance in predicting air quality across different regions.
+
+### California AOD Dataset: MSE Evaluation across Models and K Values
+
+![California AOD MSE](![image](https://github.com/user-attachments/assets/c591b1eb-8476-4b81-ba71-50068e18ec9c))
+![California AOD MAE](![image](https://github.com/user-attachments/assets/901f62c2-c62a-4851-9ac6-3fb927596f92))
+
+This figure highlights how TPPM25 consistently outperforms LSTM, Bi-LSTM, Linear, and Heuristic models across different K values in terms of MSE and MAE.
+
+### Performance Metrics on California Dataset
+
+![Performance Metrics](![image](https://github.com/user-attachments/assets/fa57fa82-eff0-4d02-8673-f903a0be0f7b))
+
+TPPM25 achieves the lowest MAE, MSE, SDE, and SMAPE across all compared models, including the approach by Zhang et al. (2021), GNN, and traditional linear regression.
 
 ## Dataset
 - California Aerosol Optical Depth (AOD) and meteorological data.
@@ -35,6 +50,7 @@ The TPPM25 model is structured with:
 - **Dilated Causal Convolutions**: Expands receptive fields for improved long-term predictions.
 
 ## Installation & Usage
+
 ### Prerequisites
 - Python 3.8+
 - PyTorch
@@ -50,42 +66,3 @@ conda create -n TPPM25 python==3.8
 conda activate TPPM25
 pip install -r requirements.txt
 pip install -e .
-```
-
-### Example Training Command
-```bash
-python train.py TPPM25 Data510_Cali_1_k0 --norm layer --target_points 1 --context_points 5 --gpus 0 --batch_size 3 --warmup_steps 1000 --d_model 512 --d_ff 2048 --enc_layers 6 --dec_layers 6 --dropout_emb .10 --dropout_ff .15 --run_name Cali_test_contextextra --base_lr 1e-3 --l2_coeff 1e-3 --loss mse --d_qk 16 --d_v 16 --n_heads 32 --patience 10 --decay_factor .8 --wandb
-```
-
-## Logging with Weights and Biases
-We used Weights & Biases (wandb) to track all results during development, and you can do the same by providing your username and project as environment variables:
-
-wandb logging can then be enabled with the `--wandb` flag.
-
-There are several figures that can be saved to wandb between epochs. These vary by dataset but can be enabled with `--attn_plot` (for Transformer attention diagrams) and `--plot` (for prediction plotting and image completion).
-
-## Citations
-If you use this repository, please cite the following papers:
-
-```bibtex
-@article{tong2023robust,
-  title={Robust Transformer-based model for spatiotemporal PM2.5 prediction in California},
-  author={Weitian Tong and Jordan Limperis and Felix Hamza-Lup and Yao Xu and Lixin Li},
-  journal={Earth Science Informatics},
-  year={2023},
-  doi={10.1007/s12145-023-01138-w}
-}
-
-@article{limperis2023pm2.5,
-  title={PM2.5 forecasting based on transformer neural network and data embedding},
-  author={Jordan Limperis and Weitian Tong and Felix Hamza-Lup and Lixin Li},
-  journal={Earth Science Informatics},
-  year={2023},
-  doi={10.1007/s12145-023-01002-x}
-}
-```
-
-For further details, refer to the original research papers:
-- [PM2.5 Forecasting Based on Transformer Neural Network and Data Embedding](https://doi.org/10.1007/s12145-023-01002-x)
-- [Robust Transformer-based Model for Spatiotemporal PM2.5 Prediction in California](https://doi.org/10.1007/s12145-023-01138-w)
-
